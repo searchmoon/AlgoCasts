@@ -7,6 +7,14 @@
 //   palindrome("abba") === true
 //   palindrome("abcdefg") === false
 
-function palindrome(str) {}
+//풀이 1.
+// function palindrome(str) {
+//     return str === str.split("").reverse().join("");
+// }
+
+//풀이 2. every 메서드 사용
+function palindrome(str) {
+  return str.split("").every((char, i) => char === str[str.length - i - 1]);
+}
 
 module.exports = palindrome;
