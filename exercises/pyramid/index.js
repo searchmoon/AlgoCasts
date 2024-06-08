@@ -13,7 +13,7 @@
 //       '  #  '
 //       ' ### '
 //       '#####'
-
+// 풀이 1.
 function pyramid(n) {
   const midpoint = Math.floor((2 * n - 1) / 2);
 
@@ -31,10 +31,26 @@ function pyramid(n) {
     console.log(level);
   }
 }
-// (n - 1) * 2 + 1 하면 column
-// row 는 n
-// 그만큼 반복.
-// 이중 for문인데, 컬럼에서는
-// n-1까지는
+
+// 풀이 2. 재귀 함수
+function pyramid(n, row = 0, level = "") {
+  if (row === n) {
+    return;
+  }
+
+  if (level.length === 2 * n - 1) {
+    console.log(level);
+    return pyramid(n, row + 1);
+  }
+
+  const midpoint = Math.floor((2 * n - 1) / 2);
+  let add;
+  if (midpoint - row <= level.length && midpoint + row >= level.length) {
+    add = "#";
+  } else {
+    add = " ";
+  }
+  pyramid(n, row, level + add);
+}
 
 module.exports = pyramid;
