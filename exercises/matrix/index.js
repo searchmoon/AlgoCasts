@@ -1,19 +1,67 @@
-// --- Directions
-// Write a function that accepts an integer N
-// and returns a NxN spiral matrix.
-// --- Examples
-//   matrix(2)
-//     [[1, 2],
-//     [4, 3]]
-//   matrix(3)
-//     [[1, 2, 3],
-//     [8, 9, 4],
-//     [7, 6, 5]]
-//  matrix(4)
-//     [[1,   2,  3, 4],
-//     [12, 13, 14, 5],
-//     [11, 16, 15, 6],
-//     [10,  9,  8, 7]]
+// // --- Directions
+// // Write a function that accepts an integer N
+// // and returns a NxN spiral matrix.
+// // --- Examples
+// //   matrix(2)
+// //     [[1, 2],
+// //     [4, 3]]
+// //   matrix(3)
+// //     [[1, 2, 3],
+// //     [8, 9, 4],
+// //     [7, 6, 5]]
+// //  matrix(4)
+// //     [[1,   2,  3, 4],
+// //     [12, 13, 14, 5],
+// //     [11, 16, 15, 6],
+// //     [10,  9,  8, 7]]
+
+// function matrix(n) {
+//   let results = [];
+
+//   for (let i = 0; i < n; i++) {
+//     results.push([]);
+//   }
+
+//   let counter = 1;
+//   let startColumn = 0;
+//   let endColumn = n - 1;
+//   let startRow = 0;
+//   let endRow = n - 1;
+
+//   while (startColumn <= endColumn && startRow <= endRow) {
+//     // Top row
+//     for (let i = startColumn; i <= endColumn; i++) {
+//       results[startRow][i] = counter;
+//       counter++;
+//     }
+//     startRow++;
+
+//     //Right column
+//     for (let i = startRow; i <= endRow; i++) {
+//       results[i][endColumn] = counter;
+//       counter++;
+//     }
+//     endColumn--;
+
+//     //Bottom row
+//     for (let i = endColumn; i >= startColumn; i--) {
+//       results[endRow][i] = counter;
+//       counter++;
+//     }
+//     endRow--;
+
+//     //Start column
+//     for (let i = endRow; i >= startRow; i--) {
+//       results[i][startColumn] = counter;
+//       counter++;
+//     }
+//     startColumn++;
+//   }
+
+//   return results;
+// }
+
+// module.exports = matrix;
 
 function matrix(n) {
   let results = [];
@@ -21,43 +69,39 @@ function matrix(n) {
   for (let i = 0; i < n; i++) {
     results.push([]);
   }
+  console.log(results);
 
-  let counter = 1;
-  let startColumn = 0;
-  let endColumn = n - 1;
-  let startRow = 0;
-  let endRow = n - 1;
+  let count = 1;
+  let sc = 0; //startColumn
+  let sr = 0; //startRow
+  let ec = n - 1; //endColumn
+  let er = n - 1; //endRow
 
-  while (startColumn <= endColumn && startRow <= endRow) {
-    // Top row
-    for (let i = startColumn; i <= endColumn; i++) {
-      results[startRow][i] = counter;
-      counter++;
+  while (ec - sc >= 0 && er - sr >= 0) {
+    for (let i = sc; i <= ec; i++) {
+      results[sr][i] = count;
+      count++;
     }
-    startRow++;
+    sr++;
 
-    //Right column
-    for (let i = startRow; i <= endRow; i++) {
-      results[i][endColumn] = counter;
-      counter++;
+    for (let i = sr; i <= er; i++) {
+      results[i][ec] = count;
+      count++;
     }
-    endColumn--;
+    ec--;
 
-    //Bottom row
-    for (let i = endColumn; i >= startColumn; i--) {
-      results[endRow][i] = counter;
-      counter++;
+    for (let i = ec; i >= sc; i--) {
+      results[er][i] = count;
+      count++;
     }
-    endRow--;
+    er--;
 
-    //Start column
-    for (let i = endRow; i >= startRow; i--) {
-      results[i][startColumn] = counter;
-      counter++;
+    for (let i = er; i >= sr; i--) {
+      results[i][sc] = count;
+      count++;
     }
-    startColumn++;
+    sc++;
   }
-
   return results;
 }
 
